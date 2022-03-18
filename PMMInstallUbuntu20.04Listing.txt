@@ -1,0 +1,201 @@
+sudo apt install -y curl
+
+[sudo] password for stoker: 
+Reading package lists... Done
+Building dependency tree       
+Reading state information... Done
+The following package was automatically installed and is no longer required:
+  libfwupdplugin1
+Use 'sudo apt autoremove' to remove it.
+The following NEW packages will be installed:
+  curl
+0 upgraded, 1 newly installed, 0 to remove and 0 not upgraded.
+Need to get 161 kB of archives.
+After this operation, 412 kB of additional disk space will be used.
+Get:1 http://us.archive.ubuntu.com/ubuntu focal-updates/main amd64 curl amd64 7.68.0-1ubuntu2.7 [161 kB]
+Fetched 161 kB in 0s (406 kB/s)
+Selecting previously unselected package curl.
+(Reading database ... 178233 files and directories currently installed.)
+Preparing to unpack .../curl_7.68.0-1ubuntu2.7_amd64.deb ...
+Unpacking curl (7.68.0-1ubuntu2.7) ...
+Setting up curl (7.68.0-1ubuntu2.7) ...
+Processing triggers for man-db (2.9.1-1) ...
+
+
+curl -fsSL https://www.percona.com/get/pmm | /bin/bash
+
+$ curl -fsSL https://www.percona.com/get/pmm | /bin/bash
+Gathering/downloading required components, this may take a moment
+
+Checking docker installation - not installed. Installing...
+
+# Executing docker install script, commit: 93d2499759296ac1f9c510605fef85052a2c32be
++ sudo -E sh -c apt-get update -qq >/dev/null
++ sudo -E sh -c DEBIAN_FRONTEND=noninteractive apt-get install -y -qq apt-transport-https ca-certificates curl >/dev/null
++ sudo -E sh -c curl -fsSL "https://download.docker.com/linux/ubuntu/gpg" | gpg --dearmor --yes -o /usr/share/keyrings/docker-archive-keyring.gpg
+gpg: WARNING: unsafe ownership on homedir '/home/stoker/.gnupg'
++ sudo -E sh -c echo "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu focal stable" > /etc/apt/sources.list.d/docker.list
++ sudo -E sh -c apt-get update -qq >/dev/null
++ sudo -E sh -c DEBIAN_FRONTEND=noninteractive apt-get install -y -qq --no-install-recommends  docker-ce-cli docker-scan-plugin docker-ce >/dev/null
++ version_gte 20.10
++ [ -z  ]
++ return 0
++ sudo -E sh -c DEBIAN_FRONTEND=noninteractive apt-get install -y -qq docker-ce-rootless-extras >/dev/null
++ sudo -E sh -c docker version
+Client: Docker Engine - Community
+ Version:           20.10.13
+ API version:       1.41
+ Go version:        go1.16.15
+ Git commit:        a224086
+ Built:             Thu Mar 10 14:07:51 2022
+ OS/Arch:           linux/amd64
+ Context:           default
+ Experimental:      true
+
+Server: Docker Engine - Community
+ Engine:
+  Version:          20.10.13
+  API version:      1.41 (minimum version 1.12)
+  Go version:       go1.16.15
+  Git commit:       906f57f
+  Built:            Thu Mar 10 14:05:44 2022
+  OS/Arch:          linux/amd64
+  Experimental:     false
+ containerd:
+  Version:          1.5.10
+  GitCommit:        2a1d4dbdb2a1030dc5b01e96fb110a9d9f150ecc
+ runc:
+  Version:          1.0.3
+  GitCommit:        v1.0.3-0-gf46b6ba
+ docker-init:
+  Version:          0.19.0
+  GitCommit:        de40ad0
+
+================================================================================
+
+To run Docker as a non-privileged user, consider setting up the
+Docker daemon in rootless mode for your user:
+
+    dockerd-rootless-setuptool.sh install
+
+Visit https://docs.docker.com/go/rootless/ to learn about rootless mode.
+
+
+To run the Docker daemon as a fully privileged service, but granting non-root
+users access, refer to https://docs.docker.com/go/daemon-access/
+
+WARNING: Access to the remote API on a privileged Docker daemon is equivalent
+         to root access on the host. Refer to the 'Docker daemon attack surface'
+         documentation for details: https://docs.docker.com/go/attack-surface/
+
+
+
+
+
+Starting PMM server...
+Created PMM Data Volume: pmm-data
+Created PMM Server: pmm-server
+	Use the following command if you ever need to update your container by hand:
+	docker run -d -p 443:443 --volumes-from pmm-data --name pmm-server --restart always percona/pmm-server:2 
+
+PMM Server has been successfully setup on this system!
+
+You can access your new server using the one of following web addresses:
+	https://127.0.0.1:443/
+	https://10.0.2.15:443/
+	https://172.17.0.1:443/
+
+The default username is 'admin' and the password is 'admin' :)
+Note: Some browsers may not trust the default SSL certificate when you first open one of the urls above.
+If this is the case, Chrome users may want to type 'thisisunsafe' to bypass the warning.
+
+Enjoy Percona Monitoring and Management!
+
+
+
+
+wget https://repo.percona.com/apt/percona-release_latest.$(lsb_release -sc)_all.deb
+
+
+sudo dpkg -i percona-release_latest.$(lsb_release -sc)_all.deb
+
+Selecting previously unselected package percona-release.
+(Reading database ... 178485 files and directories currently installed.)
+Preparing to unpack percona-release_latest.focal_all.deb ...
+Unpacking percona-release (1.0-27.generic) ...
+Setting up percona-release (1.0-27.generic) ...
+* Enabling the Percona Original repository
+<*> All done!
+==> Please run "apt-get update" to apply changes
+* Enabling the Percona Release repository
+<*> All done!
+==> Please run "apt-get update" to apply changes
+The percona-release package now contains a percona-release script that can enable additional repositories for our newer products.
+
+For example, to enable the Percona Server 8.0 repository use:
+
+  percona-release setup ps80
+
+Note: To avoid conflicts with older product versions, the percona-release setup command may disable our original repository for some products.
+
+For more information, please visit:
+  https://www.percona.com/doc/percona-repo-config/percona-release.html
+
+
+
+sudo apt-get update
+Hit:1 http://us.archive.ubuntu.com/ubuntu focal InRelease
+Get:2 http://repo.percona.com/percona/apt focal InRelease [15.8 kB]            
+Hit:3 http://us.archive.ubuntu.com/ubuntu focal-updates InRelease              
+Hit:4 http://security.ubuntu.com/ubuntu focal-security InRelease               
+Get:5 http://repo.percona.com/prel/apt focal InRelease [9,779 B]               
+Hit:6 http://us.archive.ubuntu.com/ubuntu focal-backports InRelease            
+Get:7 http://repo.percona.com/percona/apt focal/main Sources [4,509 B]
+Hit:8 https://download.docker.com/linux/ubuntu focal InRelease      
+Get:9 http://repo.percona.com/percona/apt focal/main i386 Packages [414 B]
+Get:10 http://repo.percona.com/percona/apt focal/main amd64 Packages [18.1 kB]
+Get:11 http://repo.percona.com/prel/apt focal/main i386 Packages [750 B]
+Get:12 http://repo.percona.com/prel/apt focal/main amd64 Packages [851 B]
+Fetched 50.2 kB in 1s (59.3 kB/s)
+Reading package lists... Done
+
+
+sudo apt-get install pmm2-client
+Reading package lists... Done
+Building dependency tree       
+Reading state information... Done
+The following package was automatically installed and is no longer required:
+  libfwupdplugin1
+Use 'sudo apt autoremove' to remove it.
+The following NEW packages will be installed:
+  pmm2-client
+0 upgraded, 1 newly installed, 0 to remove and 0 not upgraded.
+Need to get 78.0 MB of archives.
+After this operation, 195 MB of additional disk space will be used.
+Get:1 http://repo.percona.com/percona/apt focal/main amd64 pmm2-client amd64 2.26.0-6.focal [78.0 MB]
+Fetched 78.0 MB in 8s (9,481 kB/s)                                             
+Selecting previously unselected package pmm2-client.
+(Reading database ... 178490 files and directories currently installed.)
+Preparing to unpack .../pmm2-client_2.26.0-6.focal_amd64.deb ...
+Adding system user `pmm-agent' (UID 127) ...
+Adding new group `pmm-agent' (GID 134) ...
+Adding new user `pmm-agent' (UID 127) with group `pmm-agent' ...
+Creating home directory `/usr/local/percona' ...
+Unpacking pmm2-client (2.26.0-6.focal) ...
+Setting up pmm2-client (2.26.0-6.focal) ...
+Created symlink /etc/systemd/system/multi-user.target.wants/pmm-agent.service → /lib/systemd/system/pmm-agent.service.
+
+
+
+sudo pmm-admin config --server-insecure-tls --server-url=https://admin:admin@localhost
+Checking local pmm-agent status...
+pmm-agent is running.
+Registering pmm-agent on PMM Server...
+Registered.
+Configuration file /usr/local/percona/pmm2/config/pmm-agent.yaml updated.
+Reloading pmm-agent configuration...
+Configuration reloaded.
+Checking local pmm-agent status...
+pmm-agent is running.
+
+
